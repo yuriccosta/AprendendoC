@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+
+/* testar com: 
+str1 = "aa" e str2 == "aab"
+str1 = "aa" e str2 == "ab"
+str1 = "ab" e str2 == "aa"
+str1 = "aa" e str2 == "aa"
+*/
 int strcmpR(char str1[], char str2[]){
     if (str1[0] == '\0' || str2[0] == '\0'){
         return str1[0] - str2[0];
@@ -12,6 +19,12 @@ int strcmpR(char str1[], char str2[]){
 
 }
 
+/* testar com: 
+str1 = "aa" e str2 == "aab"
+str1 = "aa" e str2 == "ab"
+str1 = "ab" e str2 == "aa"
+str1 = "aa" e str2 == "aa"
+*/
 int strcmpY(char str1[], char str2[]){
     int dif = 0, c = 0;
     while (str1[c] != '\0' && str2[c] != '\0'){

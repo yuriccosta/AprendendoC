@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// Testar com "esbel"
 int strlenc(char str[]){
     int len = 0;
     for (int c = 0; str[c] != '\0'; c++){

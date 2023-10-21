@@ -1,5 +1,15 @@
 #include <stdio.h>
 
+
+
+/*
+Professor, quando eu fui fazer a prova eu considerei que teria que contar quantos zeros tinha
+no array, até porque a função tem o nome quantZero. Então aqui eu deixei do mesmo jeito, mas é só trocar
+as condições == 0, por != 0, caso seja pra contar quantos são diferentes de zero
+*/
+
+
+//testar com vet[] = {0,0,2,3} e n = 4
 int quantZero(int vet[], int n){
     int q = 0;
     for (int c = 0; c < n; c++){
@@ -8,6 +18,7 @@ int quantZero(int vet[], int n){
     return q;
 }
 
+//testar com vet[] = {0,0,2,3} e n = 4
 int quantZeroR(int vet[], int n){
     int q = 0;
     if (n == 0){return 0;
