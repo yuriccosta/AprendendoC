@@ -33,6 +33,7 @@ void printlista(lista* encad){
         printf("%d -> ", encad->val);
         encad = encad->prox;
     }
+    printf("\n");
 }
 
  
@@ -85,7 +86,7 @@ lista *addbyindex(lista* encad, int val, int pos){
     if (encad == NULL){
         new->prox = NULL;
         return new;
-    }else if (encad->prox != NULL){
+    }else if (encad->prox != NULL && pos != 0){
 
         int c = 0;
         lista *aux = NULL, *var = encad;
@@ -101,6 +102,33 @@ lista *addbyindex(lista* encad, int val, int pos){
     } else{
         new->prox = encad;
         return new;
+    }
+}
+
+//Remove um elemento na lista considerando a posição 0 como a primeira
+lista *rmbyindex(lista* encad, int *val, int pos){
+    if (encad == NULL){
+        return NULL;
+    }else if (encad->prox == NULL){
+        *val = encad->val;
+        free(encad);
+        return NULL;
+    }else if(pos != 0){
+        int c = 0;
+        lista *aux = NULL, *var = encad;
+
+        while ((c < pos) && (var->prox != NULL)){
+            aux = var;
+            var = var->prox;
+            c++;
+        }
+        aux->prox = var->prox;
+        free(var);
+        return encad;
+    } else{
+        lista *aux = encad->prox;
+        free(encad);
+        return aux;
     }
 }
 
@@ -122,11 +150,9 @@ int main(void){
     preenchido = geralista(x, 10);
     printf("Primeira lista:\n");
     printlista(preenchido);
-    printf("\n");
 
     addbyindex(preenchido,10,30);
     printlista(preenchido);
-    printf("\n");
 
     int *val = (int*) malloc(sizeof(int));
     
@@ -134,11 +160,13 @@ int main(void){
     printf("\nSegunda lista:\n");
     printlista(new);
 
-    new = removenofinal(new, val);
-    printf("\nValor removido: %d\n", *val);
+    //new = removenofinal(new, val);
+    //printf("\nValor removido: %d\n", *val);
 
     new = addbyindex(new, 10, 0);
-    printf("Segunda lista depois de remover e adicionar o valor 10:\n");
+    new = addbyindex(new, 12, 1);
+    printlista(new);
+    new = rmbyindex(new,val,1);
     printlista(new);
 
 }
