@@ -7,6 +7,8 @@ typedef struct intlist{
     struct intlist* prox;
 } lista;
 
+
+// Gera uma lista com base em um vetor
 lista* geralista(int vet[], int n){
     lista *aux = (lista*) malloc(sizeof(lista));
     aux->val = vet[0];
@@ -24,6 +26,7 @@ lista* geralista(int vet[], int n){
 
 }
 
+//Mostra na tela a lista encadeada
 void printlista(lista* encad){
 
     while (encad != NULL){
@@ -33,7 +36,7 @@ void printlista(lista* encad){
 }
 
  
-
+// Adiciona um elemento no final da lista
 lista *adicionanofinal(lista* encad, int x){
     lista *new = (lista*) malloc(sizeof(lista)), *aux = encad;
     new->val = x;
@@ -50,6 +53,7 @@ lista *adicionanofinal(lista* encad, int x){
     return new;
 }
 
+//Remove um elemento da lista no final
 lista *removenofinal(lista* encad, int *x){
     lista *aux;
 
@@ -73,30 +77,37 @@ lista *removenofinal(lista* encad, int *x){
     return encad;
 }
 
-//consertar para adiconar exatamente no ícone e não um depois
-lista *addbyindex(lista* encad,int val, int pos){
+//Adiciona um novo elemento na lista considerando a posição 0 como a primeira
+lista *addbyindex(lista* encad, int val, int pos){
     lista *new = (lista*) malloc(sizeof(lista));
+    new->val = val;
+
     if (encad == NULL){
+        new->prox = NULL;
         return new;
-    }else if (encad != NULL){
+    }else if (encad->prox != NULL){
+
         int c = 0;
         lista *aux = NULL, *var = encad;
-        while ((c < pos) && (var->prox != NULL)){
+
+        while ((c < pos) && (var != NULL)){
+            aux = var;
             var = var->prox;
-            aux = var->prox;
             c++;
         }
-        lista *new = (lista*) malloc(sizeof(lista));
-        new->val = val;
-        new->prox = aux;
-        var->prox = new;
+        new->prox = var;
+        aux->prox = new;
         return encad;
+    } else{
+        new->prox = encad;
+        return new;
     }
 }
 
 
 int main(void){
     int x[10];
+    srand(time(NULL));
 
     printf("Array:\n");
     for(int i = 0; i < 10; i++){
@@ -112,7 +123,8 @@ int main(void){
     printf("Primeira lista:\n");
     printlista(preenchido);
     printf("\n");
-    addbyindex(preenchido,10,3);
+
+    addbyindex(preenchido,10,30);
     printlista(preenchido);
     printf("\n");
 
@@ -121,11 +133,12 @@ int main(void){
     new = adicionanofinal(new, 23);
     printf("\nSegunda lista:\n");
     printlista(new);
-    printf("\n");
-    //new = removenofinal(new, val);
-    //printf("\nValor removido: %d\n\n", *val);
-    //printf("Segunda lista depois de remover:\n");
-    new = addbyindex(new, 10, 3);
+
+    new = removenofinal(new, val);
+    printf("\nValor removido: %d\n", *val);
+
+    new = addbyindex(new, 10, 0);
+    printf("Segunda lista depois de remover e adicionar o valor 10:\n");
     printlista(new);
 
 }
