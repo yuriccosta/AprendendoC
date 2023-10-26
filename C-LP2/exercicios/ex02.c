@@ -44,7 +44,7 @@ char* geraFrase(int tam){
         if (c == 0){
             palavra[c] = palavra[c] - ('a' - 'A');
             
-            for (int d = 0; d <= strlen(palavra) ; d++){
+            for (unsigned int d = 0; d <= strlen(palavra) ; d++){
                 if (d == strlen(palavra)){
                     frase[pos] = ' ';
                     
@@ -54,7 +54,7 @@ char* geraFrase(int tam){
                 pos++;
             }
         }else{
-            for (int d = 0; d <= strlen(palavra); d++){
+            for (unsigned int d = 0; d <= strlen(palavra); d++){
                 if (d == strlen(palavra)){
                     frase[pos] = ' ';
                     
