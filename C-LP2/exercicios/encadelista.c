@@ -144,7 +144,7 @@ int main(void){
     }
     printf("\n\n");
 
-    lista *preenchido = (lista*) malloc(sizeof(lista));
+    lista *preenchido = NULL;
     lista *new = NULL;
 
     preenchido = geralista(x, 10);
