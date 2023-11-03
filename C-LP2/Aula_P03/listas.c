@@ -34,7 +34,7 @@ typedef struct lista
     Retorno: No* - ponteiro para o nó criado
 */
 No* criarNo(Livro livro)
-{
+{   
     No *no = (No*) malloc(sizeof(No));
     no->info = livro;
     no->prox = NULL;
@@ -99,17 +99,19 @@ int adicionarNoMeio(Lista *lista, Livro livro, int pos)
     No *new = (No*) malloc(sizeof(No));
     new->info = livro;
     lista->qtd++;
-
+    /* Considerando que o meio seja o meio da lista atual e não o meio da lista com mais um elemento
+    Caso seja o meio de mais um elemento é so fazer pos++ */
+    //pos++;
     if (lista->inicio == NULL){
         new->prox = NULL;
         lista->inicio = new;
         lista->fim = new;
         return 1;
-    }else if (lista->inicio->prox != NULL && pos != 0){
+    }else if (lista->inicio->prox != NULL && pos != 1){
         // Considerando que se queira adicionar no meio, pos é reduzido pela metade;
-        pos = pos / 2;
+        pos = (pos % 2 == 0) ?   pos / 2: pos / 2 + 1;
 
-        int c = 0;
+        int c = 1;
         No *aux = NULL, *var = lista->inicio;
 
         while ((c < pos) && (var != NULL)){
@@ -121,10 +123,12 @@ int adicionarNoMeio(Lista *lista, Livro livro, int pos)
         new->prox = var;
         aux->prox = new;
         return 1;
-    } else{
+    } else if(pos == 1){
         new->prox = lista->inicio;
         lista->inicio = new;
         return 1;
+    } else{
+        return 0;
     }
 }
 
@@ -213,10 +217,10 @@ Livro removerNoMeio(Lista *lista, int pos)
         strcpy(removido.titulo, "NULL");
         lista->qtd--;
         return removido;
-    }else if(pos != 0){
+    }else if(pos != 1){
         // Considerando que se queira remover no meio, pos é reduzido pela metade;
-        pos = pos / 2;
-        int c = 0;
+        pos = (pos % 2 == 0) ?   pos / 2: pos / 2 + 1;
+        int c = 1;
         No *var = NULL;
 
         while ((c < pos) && (aux->prox != NULL)){
@@ -255,35 +259,38 @@ int main(int argc, char const *argv[])
     meusLivros->inicio = NULL;
     meusLivros->fim = NULL;
     meusLivros->qtd = 0;
-    Livro l1, l2, l3, l4;
-    l1 = criarlivro("Teste 1", "Yuri", 2023, 20, 10.0);
-    l2 = criarlivro("Chimichanga", "Donatello", 2015, 340, 40);
-    l3 = criarlivro("Why linux its better", "annon", 2021, 777, 1.99);
-    l4 = criarlivro("Caro Vapor", "Don L", 2013, 13, 0.00);
+    Livro l1, l2, l3, l4, l5;
+    l1 = criarlivro("Teste 1", "Yuri", 2023, 20, 10.0f);
+    l2 = criarlivro("Chimichanga", "Donatello", 2015, 340, 40.0f);
+    l3 = criarlivro("Why linux its better", "annon", 2021, 777, 1.99f);
+    l4 = criarlivro("Caro Vapor", "Don L", 2013, 13, 0.00f);
+    l5 = criarlivro("Linha de Frente", "Rashid", 2022, 5, 0.00f);
 
-    No *no1 = NULL;
-    no1 = criarNo(l1);
-    meusLivros->inicio = no1;
-    meusLivros->fim = no1;
+    
+    meusLivros->inicio = criarNo(l1);
+    meusLivros->fim = meusLivros->inicio;
     meusLivros->qtd = 1;
-    printLista(meusLivros);
+    //printLista(meusLivros);
 
     adicionaLivroNoFinal(meusLivros, l2);
-    printf("Adicionado Livro no final\n");
-    printLista(meusLivros);
+    adicionaLivroNoFinal(meusLivros, l3);
+    //printf("Adicionado Livro no final\n");
+    //printLista(meusLivros);
 
     
-    adicionaLivroNoInicio(meusLivros, l3);
-    printf("Adicionado Livro no Inicio\n");
-    printLista(meusLivros);
+    adicionaLivroNoInicio(meusLivros, l4);
+    //printf("Adicionado Livro no Inicio\n");
+    //printLista(meusLivros);
     
-    adicionarNoMeio(meusLivros, l4, meusLivros->qtd);
-    printf("Adicionado Livros no meio\n");
+    adicionarNoMeio(meusLivros, l5, meusLivros->qtd);
+    //printf("Adicionado Livros no meio\n");
     printLista(meusLivros);
 
     Lista *lremovidos = (Lista*) malloc(sizeof(Lista));
-    lremovidos->inicio = criarNo(removerNoFinal(meusLivros));
-    printf("Removido Livro no final\n");
+    //lremovidos->inicio = criarNo(removerNoFinal(meusLivros));
+    //lremovidos->inicio = criarNo(removerNoInicio(meusLivros));
+    lremovidos->inicio = criarNo(removerNoMeio(meusLivros, meusLivros->qtd));
+    printf("Removidos:\n");
     printLista(lremovidos);
     printf("Lista atual: ----------------------------------------------\n");
     printLista(meusLivros);
