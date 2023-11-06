@@ -57,7 +57,7 @@ int main (void){
 
     for (int i = 0; i < lin; i++){
         for (int j = 0; j < col; j++){
-            printf("%d", img[i][j]);
+            printf("%d ", img[i][j]);
             if (i > 0 && j % 640 == 0){
                 printf("\n");
             }
@@ -68,7 +68,6 @@ int main (void){
             if (j < 10 || (j >= 123 && j <= 132 ) || (j >= 246 && j <= 255 ))
             printf("O valor de histo[%d] %d\n",j , histo[j]);
         }
-
 
     free(img);
 
