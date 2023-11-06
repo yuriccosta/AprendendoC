@@ -83,6 +83,7 @@ int main (void){
     }
     
     for(int j = 0;j< 256;j++){
+            if (j < 10 || (j >= 123 && j <= 132 ) || (j >= 246 && j <= 255 ))
             printf("O valor de histo[%d] %d\n",j , histo[j]);
         }
 

@@ -3,8 +3,7 @@
 
 int main (void){
 
-    // Boa sorte
-
+    
 
     return 0;
 }
