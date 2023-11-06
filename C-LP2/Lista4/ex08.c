@@ -75,19 +75,25 @@ int main (void){
     
     //vet = geraImagemArray(lin,col);
     uni = geraImagem(lin, col);
-    histo = histograma(uni, lin, col);
+    
     filter = filtroMedia(uni, lin, col);
-
-    for(int i = 0;i<lin;i++){
-            printf("O valor de uni[%d]: %d\n",i,uni[i]);
+    for(int i = 0 ; i < col * lin;i++){
+            for (int j = 0; j < 5; j++){
+                printf("O valor de uni[%d]: %d\n",j + i,uni[j + i]);
+            }
+        i = i + col;
     }
     
+    histo = histograma(uni, lin, col);
     for(int j = 0;j< 256;j++){
             if (j < 10 || (j >= 123 && j <= 132 ) || (j >= 246 && j <= 255 ))
             printf("O valor de histo[%d] %d\n",j , histo[j]);
         }
 
-    for(int i = 0;i<lin;i++){
-            printf("O valor de filter[%d]: %d\n",i, filter[i]);
+    for(int i = 0 ; i < col * lin;i++){
+            for (int j = 0; j < 5; j++){
+                printf("O valor de filter[%d]: %d\n",j + i,filter[j + i]);
+            }
+        i = i + col;
     }
 }
