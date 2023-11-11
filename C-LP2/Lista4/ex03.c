@@ -7,7 +7,7 @@
 //3- a
 
 char* geraPalavra(int tam){
-    char* palavra = (char*) malloc(sizeof(char) * tam);
+    char* palavra = (char*) malloc(sizeof(char) * (tam + 1));
     tam =  2 + rand() % tam;
     /*if (tam < 2){
         printf("A palavra não pode ter menos que duas letras");

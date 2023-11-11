@@ -9,11 +9,12 @@ typedef struct pixel {
 
 Pixel* geraImagem(int lin, int col){
 
-    Pixel *imagem = (Pixel*) malloc(lin*sizeof(Pixel));
-    for(int i = 0;i<lin;i++){
-        imagem->r = 1+rand()%255;
-        imagem->g = 1+rand()%255;
-        imagem->b = 1+rand()%255;
+    int tam = lin * col;
+    Pixel *imagem = (Pixel*) malloc(tam * sizeof(Pixel));
+    for(int i = 0; i < tam; i++){
+        imagem[i].r = 1+rand()%255;
+        imagem[i].g = 1+rand()%255;
+        imagem[i].b = 1+rand()%255;
     }
 
   return imagem;
@@ -24,7 +25,8 @@ Pixel* geraImagem(int lin, int col){
 
 int main(void){
     geraImagem(640, 480);
-
+    printf("%ld\n", sizeof(Pixel));
+    printf("%ld\n", 3 * sizeof(unsigned char));
 
     return 0;
 }
