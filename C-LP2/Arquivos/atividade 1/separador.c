@@ -4,8 +4,8 @@
 int main(void){
     // Abre os três arquivos
     FILE * fp = fopen("../student_math_clean.csv", "r");
-    FILE *masc = fopen("../masc.txt", "w");
-    FILE *fem = fopen("../fem.txt", "w");
+    FILE *masc = fopen("../masc.csv", "w");
+    FILE *fem = fopen("../fem.csv", "w");
     
     // Verifica se ocorreu um erro na hora de abrir e encerra o programa se ocorreu
     if (fp == NULL || fem == NULL || masc == NULL){
@@ -13,7 +13,7 @@ int main(void){
         return 0;
     }
     
-    
+
     char aux[500];
     //Pega a primeira linha que a gente não quer
     fgets(aux, 500, fp);
