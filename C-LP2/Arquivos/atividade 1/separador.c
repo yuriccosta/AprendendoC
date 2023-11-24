@@ -15,8 +15,10 @@ int main(void){
     
 
     char aux[500];
-    //Pega a primeira linha que a gente não quer
+    //Pega a primeira linha dos títulos e coloca nos outros arquivos
     fgets(aux, 500, fp);
+    fputs(aux, fem);
+    fputs(aux, masc);
 
     // Percorre o arquivo principal até chegar no final: feof == 1
     while (!feof(fp)){
