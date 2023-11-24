@@ -24,7 +24,6 @@ int main(void){
     while (!feof(fp)){
         fgets(aux, 500, fp);
         int contvirg = 0;
-        int c = 0;
         // Percorre a linha que está na variavel aux, caracter a caracter
         for(int c = 0; aux[c] != '\0'; c++){
             // Verifica se encontramos uma vírgula e adiciona ao contador
