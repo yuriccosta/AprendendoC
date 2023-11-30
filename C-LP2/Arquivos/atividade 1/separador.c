@@ -20,6 +20,9 @@ int main(void){
     fputs(aux, fem);
     fputs(aux, masc);
 
+    int contf = 1;
+    int contm = 1;
+
     // Percorre o arquivo principal até chegar no final: feof == 1
     while (!feof(fp)){
         fgets(aux, 500, fp);
@@ -31,9 +34,9 @@ int main(void){
             // Quando chegamos em 2 vírgulas estamos no 3 campo, que é a coluna do sexo
             if (contvirg == 2){
                 if(aux[c + 1] == 'F'){
-                    fputs(aux, fem);
+                    fprintf(fem, "%d,%s", contf++, aux + c + 1);
                 } else{
-                    fputs(aux, masc);
+                    fprintf(masc, "%d,%s", contm++, aux + c + 1);
                 }
                 // Já encontramos o que queríamos não precisa mais percorrer
                 break;
