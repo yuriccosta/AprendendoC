@@ -58,7 +58,7 @@ int main(void){
 
     for (int c = 0; c < 10; c++){
         for (int d = 0; d < 10; d++){
-            
+
             printf("Diferença entre txt e binário: %lf\n", matriztxt[c][d] - matrizbin[c][d]);
         }
     }
